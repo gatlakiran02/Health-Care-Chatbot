@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Intelligent Healthcare Assistant</title>
+    <meta name="description" content="An advanced AI-powered symptom checker and health assessment tool that helps you understand potential medical conditions based on decision tree models.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M19 10.5h-5.5V5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v5.5H5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h5.5V19c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5.5H19c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z"/>
+                    </svg>
+                </div>
+                <div class="brand-name">
+                    <h1>MedAI Assistant</h1>
+                    <p>AI-Powered Symptom Diagnostic Engine</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="mute-btn" class="icon-btn active" title="Toggle Voice Assistant">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Chat Assistant Section -->
+        <main class="chat-section">
+            <div class="chat-history" id="chat-history">
+                <!-- Chat bubbles will go here dynamically -->
+            </div>
+            
+            <div class="chat-input-bar">
+                <div class="input-container">
+                    <input type="text" id="chat-input" class="chat-input" placeholder="Type name, symptoms, or answers here..." autocomplete="off" disabled>
+                    <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
+                </div>
+                <button id="send-btn" class="btn btn-primary" disabled>Send</button>
+            </div>
+        </main>
+
+        <!-- Sidebar / Diagnosis Panel -->
+        <aside class="dashboard-section">
+            <!-- Instructions / Info Card -->
+            <section class="card info-card">
+                <h2>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    How to use MedAI
+                </h2>
+                <p>MedAI is an interactive symptom checker that uses a decision tree model to analyze symptoms and provide an assessment.</p>
+                <ul class="instruction-list">
+                    <li><span>1</span> Enter your name to begin the consultation.</li>
+                    <li><span>2</span> Describe the primary symptom you are experiencing.</li>
+                    <li><span>3</span> Answer the follow-up questions to refine the diagnosis.</li>
+                    <li><span>4</span> Receive your health report, severity assessment, and precautions.</li>
+                </ul>
+            </section>
+
+            <!-- Diagnosis Report Card -->
+            <section class="card report-card" id="report-card">
+                <div class="empty-state" id="report-empty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <p>Clinical Assessment Report will be generated here upon completing the chat consultation.</p>
+                </div>
+                
+                <div class="report-content" id="report-content" style="display: none;">
+                    <div class="report-header">
+                        <div>
+                            <span class="report-section-title">PREDICTED CONDITION</span>
+                            <h3 class="disease-title" id="disease-title">Fungal Infection</h3>
+                        </div>
+                        <span class="severity-badge" id="severity-badge">Low Severity</span>
+                    </div>
+
+                    <div class="report-section-title">Condition Severity</div>
+                    <div class="severity-meter-container">
+                        <div class="severity-bar" id="severity-bar"></div>
+                    </div>
+
+                    <div class="report-divider"></div>
+
+                    <div class="report-section-title">Description</div>
+                    <p class="report-desc" id="disease-desc">Fungal infections are caused by fungi that infect the skin, nails, or hair.</p>
+
+                    <div class="report-divider"></div>
+
+                    <div class="report-section-title">Recommended Measures</div>
+                    <div class="precaution-grid" id="precaution-grid">
+                        <!-- Precaution items go here -->
+                    </div>
+
+                    <div class="disclaimer-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        <p>Disclaimer: This assessment is generated for informational purposes only using machine learning. It is NOT a professional medical diagnosis. If you feel unwell, consult a doctor immediately.</p>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+    
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
