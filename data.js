@@ -1019,15 +1019,15 @@ const decisionTree = {
       "threshold": 0.5,
       "left": {
         "node_id": 3,
-        "feature": "polyuria",
+        "feature": "increased_appetite",
         "threshold": 0.5,
         "left": {
           "node_id": 4,
-          "feature": "inflammatory_nails",
+          "feature": "silver_like_dusting",
           "threshold": 0.5,
           "left": {
             "node_id": 5,
-            "feature": "enlarged_thyroid",
+            "feature": "brittle_nails",
             "threshold": 0.5,
             "left": {
               "node_id": 6,
@@ -1051,11 +1051,11 @@ const decisionTree = {
                       "threshold": 0.5,
                       "left": {
                         "node_id": 11,
-                        "feature": "prominent_veins_on_calf",
+                        "feature": "fluid_overload.1",
                         "threshold": 0.5,
                         "left": {
                           "node_id": 12,
-                          "feature": "fluid_overload.1",
+                          "feature": "prominent_veins_on_calf",
                           "threshold": 0.5,
                           "left": {
                             "node_id": 13,
@@ -1095,11 +1095,11 @@ const decisionTree = {
                                             "threshold": 0.5,
                                             "left": {
                                               "node_id": 22,
-                                              "feature": "continuous_feel_of_urine",
+                                              "feature": "belly_pain",
                                               "threshold": 0.5,
                                               "left": {
                                                 "node_id": 23,
-                                                "feature": "belly_pain",
+                                                "feature": "continuous_feel_of_urine",
                                                 "threshold": 0.5,
                                                 "left": {
                                                   "node_id": 24,
@@ -1155,11 +1155,11 @@ const decisionTree = {
                                                                           "threshold": 0.5,
                                                                           "left": {
                                                                             "node_id": 37,
-                                                                            "feature": "scurring",
+                                                                            "feature": "dehydration",
                                                                             "threshold": 0.5,
                                                                             "left": {
                                                                               "node_id": 38,
-                                                                              "feature": "dehydration",
+                                                                              "feature": "scurring",
                                                                               "threshold": 0.5,
                                                                               "left": {
                                                                                 "node_id": 39,
@@ -1167,19 +1167,19 @@ const decisionTree = {
                                                                                 "threshold": 0.5,
                                                                                 "left": {
                                                                                   "node_id": 40,
-                                                                                  "feature": "red_spots_over_body",
+                                                                                  "feature": "weakness_of_one_body_side",
                                                                                   "threshold": 0.5,
                                                                                   "left": {
                                                                                     "node_id": 41,
-                                                                                    "feature": "joint_pain",
+                                                                                    "feature": "extra_marital_contacts",
                                                                                     "threshold": 0.5,
                                                                                     "left": {
                                                                                       "node_id": 42,
-                                                                                      "feature": "muscle_wasting",
+                                                                                      "feature": "pain_behind_the_eyes",
                                                                                       "threshold": 0.5,
                                                                                       "left": {
                                                                                         "node_id": 43,
-                                                                                        "feature": "weakness_of_one_body_side",
+                                                                                        "feature": "joint_pain",
                                                                                         "threshold": 0.5,
                                                                                         "left": {
                                                                                           "node_id": 44,
@@ -1187,55 +1187,55 @@ const decisionTree = {
                                                                                           "threshold": 0.5,
                                                                                           "left": {
                                                                                             "node_id": 45,
-                                                                                            "feature": "bladder_discomfort",
+                                                                                            "feature": "spinning_movements",
                                                                                             "threshold": 0.5,
                                                                                             "left": {
                                                                                               "node_id": 46,
-                                                                                              "feature": "diarrhoea",
+                                                                                              "feature": "red_sore_around_nose",
                                                                                               "threshold": 0.5,
                                                                                               "left": {
                                                                                                 "node_id": 47,
-                                                                                                "feature": "blister",
+                                                                                                "feature": "toxic_look_(typhos)",
                                                                                                 "threshold": 0.5,
                                                                                                 "left": {
                                                                                                   "node_id": 48,
-                                                                                                  "feature": "spinning_movements",
+                                                                                                  "feature": "bladder_discomfort",
                                                                                                   "threshold": 0.5,
                                                                                                   "left": {
                                                                                                     "node_id": 49,
-                                                                                                    "feature": "nausea",
+                                                                                                    "feature": "yellowing_of_eyes",
                                                                                                     "threshold": 0.5,
                                                                                                     "left": {
                                                                                                       "node_id": 50,
-                                                                                                      "feature": "pain_in_anal_region",
+                                                                                                      "feature": "headache",
                                                                                                       "threshold": 0.5,
                                                                                                       "left": {
                                                                                                         "node_id": 51,
-                                                                                                        "feature": "acidity",
+                                                                                                        "feature": "pain_in_anal_region",
                                                                                                         "threshold": 0.5,
                                                                                                         "left": {
                                                                                                           "node_id": 52,
-                                                                                                          "feature": "passage_of_gases",
+                                                                                                          "feature": "loss_of_appetite",
                                                                                                           "threshold": 0.5,
                                                                                                           "left": {
                                                                                                             "node_id": 53,
-                                                                                                            "feature": "dizziness",
+                                                                                                            "feature": "weakness_in_limbs",
                                                                                                             "threshold": 0.5,
                                                                                                             "left": {
                                                                                                               "node_id": 54,
-                                                                                                              "feature": "fatigue",
+                                                                                                              "feature": "bruising",
                                                                                                               "threshold": 0.5,
                                                                                                               "left": {
                                                                                                                 "node_id": 55,
-                                                                                                                "feature": "history_of_alcohol_consumption",
+                                                                                                                "feature": "muscle_weakness",
                                                                                                                 "threshold": 0.5,
                                                                                                                 "left": {
                                                                                                                   "node_id": 56,
-                                                                                                                  "disease": "Arthritis"
+                                                                                                                  "disease": "Alcoholic hepatitis"
                                                                                                                 },
                                                                                                                 "right": {
                                                                                                                   "node_id": 57,
-                                                                                                                  "disease": "Alcoholic hepatitis"
+                                                                                                                  "disease": "Arthritis"
                                                                                                                 }
                                                                                                               },
                                                                                                               "right": {
@@ -1255,113 +1255,113 @@ const decisionTree = {
                                                                                                         },
                                                                                                         "right": {
                                                                                                           "node_id": 61,
-                                                                                                          "disease": "Migraine"
+                                                                                                          "disease": "Dimorphic hemmorhoids(piles)"
                                                                                                         }
                                                                                                       },
                                                                                                       "right": {
                                                                                                         "node_id": 62,
-                                                                                                        "disease": "Dimorphic hemmorhoids(piles)"
+                                                                                                        "disease": "Migraine"
                                                                                                       }
                                                                                                     },
                                                                                                     "right": {
                                                                                                       "node_id": 63,
-                                                                                                      "feature": "abdominal_pain",
+                                                                                                      "feature": "fatigue",
                                                                                                       "threshold": 0.5,
                                                                                                       "left": {
                                                                                                         "node_id": 64,
-                                                                                                        "disease": "Hepatitis C"
+                                                                                                        "disease": "Chronic cholestasis"
                                                                                                       },
                                                                                                       "right": {
                                                                                                         "node_id": 65,
-                                                                                                        "disease": "Chronic cholestasis"
+                                                                                                        "disease": "Hepatitis C"
                                                                                                       }
                                                                                                     }
                                                                                                   },
                                                                                                   "right": {
                                                                                                     "node_id": 66,
-                                                                                                    "disease": "(vertigo) Paroymsal  Positional Vertigo"
+                                                                                                    "disease": "Urinary tract infection"
                                                                                                   }
                                                                                                 },
                                                                                                 "right": {
                                                                                                   "node_id": 67,
-                                                                                                  "disease": "Impetigo"
+                                                                                                  "disease": "Typhoid"
                                                                                                 }
                                                                                               },
                                                                                               "right": {
                                                                                                 "node_id": 68,
-                                                                                                "disease": "Typhoid"
+                                                                                                "disease": "Impetigo"
                                                                                               }
                                                                                             },
                                                                                             "right": {
                                                                                               "node_id": 69,
-                                                                                              "disease": "Urinary tract infection"
+                                                                                              "disease": "(vertigo) Paroymsal  Positional Vertigo"
                                                                                             }
                                                                                           },
                                                                                           "right": {
                                                                                             "node_id": 70,
-                                                                                            "feature": "cough",
+                                                                                            "feature": "loss_of_balance",
                                                                                             "threshold": 0.5,
                                                                                             "left": {
                                                                                               "node_id": 71,
-                                                                                              "disease": "Hypertension "
+                                                                                              "disease": "GERD"
                                                                                             },
                                                                                             "right": {
                                                                                               "node_id": 72,
-                                                                                              "disease": "GERD"
+                                                                                              "disease": "Hypertension "
                                                                                             }
                                                                                           }
                                                                                         },
                                                                                         "right": {
                                                                                           "node_id": 73,
-                                                                                          "disease": "Paralysis (brain hemorrhage)"
+                                                                                          "feature": "vomiting",
+                                                                                          "threshold": 0.5,
+                                                                                          "left": {
+                                                                                            "node_id": 74,
+                                                                                            "disease": "Psoriasis"
+                                                                                          },
+                                                                                          "right": {
+                                                                                            "node_id": 75,
+                                                                                            "disease": "Hepatitis D"
+                                                                                          }
                                                                                         }
                                                                                       },
                                                                                       "right": {
-                                                                                        "node_id": 74,
-                                                                                        "disease": "AIDS"
+                                                                                        "node_id": 76,
+                                                                                        "disease": "Dengue"
                                                                                       }
                                                                                     },
                                                                                     "right": {
-                                                                                      "node_id": 75,
-                                                                                      "feature": "abdominal_pain",
-                                                                                      "threshold": 0.5,
-                                                                                      "left": {
-                                                                                        "node_id": 76,
-                                                                                        "disease": "Psoriasis"
-                                                                                      },
-                                                                                      "right": {
-                                                                                        "node_id": 77,
-                                                                                        "disease": "Hepatitis D"
-                                                                                      }
+                                                                                      "node_id": 77,
+                                                                                      "disease": "AIDS"
                                                                                     }
                                                                                   },
                                                                                   "right": {
                                                                                     "node_id": 78,
-                                                                                    "disease": "Dengue"
+                                                                                    "disease": "Paralysis (brain hemorrhage)"
                                                                                   }
                                                                                 },
                                                                                 "right": {
                                                                                   "node_id": 79,
-                                                                                  "feature": "mood_swings",
+                                                                                  "feature": "vomiting",
                                                                                   "threshold": 0.5,
                                                                                   "left": {
                                                                                     "node_id": 80,
-                                                                                    "disease": "Heart attack"
+                                                                                    "disease": "Hyperthyroidism"
                                                                                   },
                                                                                   "right": {
                                                                                     "node_id": 81,
-                                                                                    "disease": "Hyperthyroidism"
+                                                                                    "disease": "Heart attack"
                                                                                   }
                                                                                 }
                                                                               },
                                                                               "right": {
                                                                                 "node_id": 82,
-                                                                                "disease": "Gastroenteritis"
+                                                                                "disease": "Acne"
                                                                               }
                                                                             },
                                                                             "right": {
                                                                               "node_id": 83,
-                                                                              "disease": "Acne"
+                                                                              "disease": "Gastroenteritis"
                                                                             }
                                                                           },
                                                                           "right": {
@@ -1371,7 +1371,7 @@ const decisionTree = {
                                                                         },
                                                                         "right": {
                                                                           "node_id": 85,
-                                                                          "feature": "high_fever",
+                                                                          "feature": "fatigue",
                                                                           "threshold": 0.5,
                                                                           "left": {
                                                                             "node_id": 86,
@@ -1410,7 +1410,7 @@ const decisionTree = {
                                                             },
                                                             "right": {
                                                               "node_id": 93,
-                                                              "feature": "spotting_ urination",
+                                                              "feature": "burning_micturition",
                                                               "threshold": 0.5,
                                                               "left": {
                                                                 "node_id": 94,
@@ -1428,7 +1428,7 @@ const decisionTree = {
                                                             "threshold": 0.5,
                                                             "left": {
                                                               "node_id": 97,
-                                                              "feature": "yellowish_skin",
+                                                              "feature": "yellowing_of_eyes",
                                                               "threshold": 0.5,
                                                               "left": {
                                                                 "node_id": 98,
@@ -1452,7 +1452,7 @@ const decisionTree = {
                                                       },
                                                       "right": {
                                                         "node_id": 102,
-                                                        "feature": "vomiting",
+                                                        "feature": "loss_of_appetite",
                                                         "threshold": 0.5,
                                                         "left": {
                                                           "node_id": 103,
@@ -1460,7 +1460,7 @@ const decisionTree = {
                                                           "threshold": 0.5,
                                                           "left": {
                                                             "node_id": 104,
-                                                            "feature": "loss_of_appetite",
+                                                            "feature": "yellowish_skin",
                                                             "threshold": 0.5,
                                                             "left": {
                                                               "node_id": 105,
@@ -1468,15 +1468,15 @@ const decisionTree = {
                                                             },
                                                             "right": {
                                                               "node_id": 106,
-                                                              "feature": "swelled_lymph_nodes",
+                                                              "feature": "nausea",
                                                               "threshold": 0.5,
                                                               "left": {
                                                                 "node_id": 107,
-                                                                "disease": "Chronic cholestasis"
+                                                                "disease": "Jaundice"
                                                               },
                                                               "right": {
                                                                 "node_id": 108,
-                                                                "disease": "Chicken pox"
+                                                                "disease": "Chronic cholestasis"
                                                               }
                                                             }
                                                           },
@@ -1487,7 +1487,7 @@ const decisionTree = {
                                                         },
                                                         "right": {
                                                           "node_id": 110,
-                                                          "feature": "dark_urine",
+                                                          "feature": "red_spots_over_body",
                                                           "threshold": 0.5,
                                                           "left": {
                                                             "node_id": 111,
@@ -1495,7 +1495,7 @@ const decisionTree = {
                                                           },
                                                           "right": {
                                                             "node_id": 112,
-                                                            "disease": "Jaundice"
+                                                            "disease": "Chicken pox"
                                                           }
                                                         }
                                                       }
@@ -1512,12 +1512,12 @@ const decisionTree = {
                                                 },
                                                 "right": {
                                                   "node_id": 115,
-                                                  "disease": "Typhoid"
+                                                  "disease": "Urinary tract infection"
                                                 }
                                               },
                                               "right": {
                                                 "node_id": 116,
-                                                "disease": "Urinary tract infection"
+                                                "disease": "Typhoid"
                                               }
                                             },
                                             "right": {
@@ -1556,7 +1556,7 @@ const decisionTree = {
                                   },
                                   "right": {
                                     "node_id": 124,
-                                    "feature": "pain_behind_the_eyes",
+                                    "feature": "loss_of_appetite",
                                     "threshold": 0.5,
                                     "left": {
                                       "node_id": 125,
@@ -1570,7 +1570,7 @@ const decisionTree = {
                                 },
                                 "right": {
                                   "node_id": 127,
-                                  "feature": "yellowing_of_eyes",
+                                  "feature": "muscle_pain",
                                   "threshold": 0.5,
                                   "left": {
                                     "node_id": 128,
@@ -1594,17 +1594,17 @@ const decisionTree = {
                           },
                           "right": {
                             "node_id": 132,
-                            "disease": "Alcoholic hepatitis"
+                            "disease": "Varicose veins"
                           }
                         },
                         "right": {
                           "node_id": 133,
-                          "disease": "Varicose veins"
+                          "disease": "Alcoholic hepatitis"
                         }
                       },
                       "right": {
                         "node_id": 134,
-                        "feature": "muscle_weakness",
+                        "feature": "irritability",
                         "threshold": 0.5,
                         "left": {
                           "node_id": 135,

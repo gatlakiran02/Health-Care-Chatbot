@@ -68,7 +68,7 @@ testy_encoded = le.transform(testy)
 print("\n--- Model Training & Evaluation ---")
 
 # Decision Tree
-clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier(random_state=42)
 clf.fit(x_train, y_train)
 scores_dt = cross_val_score(clf, x_test, y_test, cv=3)
 print(f"Decision Tree Accuracy: {scores_dt.mean() * 100:.2f}%")

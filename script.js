@@ -212,14 +212,32 @@ function advanceChat(userInput) {
         state.days = daysVal;
         appendMessage("user", `${daysVal} days`);
         
-        // Predict initial disease assuming ONLY the primary symptom is present
-        const firstPrediction = predictDisease([state.primarySymptom]);
+        // Find all candidate diseases that present the primary symptom
+        let candidates = [];
+        for (let disease in reducedData) {
+            if (reducedData[disease].includes(state.primarySymptom)) {
+                candidates.push(disease);
+            }
+        }
         
-        // Find symptoms associated with this first predicted disease
-        const associatedSymptoms = reducedData[firstPrediction] || [];
+        // Fallback to decision tree prediction if no direct candidate is found
+        if (candidates.length === 0) {
+            candidates.push(predictDisease([state.primarySymptom]));
+        }
         
-        // Filter out the primary symptom (which we already know is present)
-        state.symptomsToCheck = associatedSymptoms.filter(sym => sym !== state.primarySymptom);
+        // Gather the union of all symptoms associated with these candidate diseases
+        let associatedSymptoms = [];
+        candidates.forEach(disease => {
+            const syms = reducedData[disease] || [];
+            syms.forEach(sym => {
+                if (!associatedSymptoms.includes(sym) && sym !== state.primarySymptom) {
+                    associatedSymptoms.push(sym);
+                }
+            });
+        });
+        
+        // Limit the check to a maximum of 8 symptoms to prevent long questionnaires
+        state.symptomsToCheck = associatedSymptoms.slice(0, 8);
         state.symptomCheckIndex = 0;
         
         if (state.symptomsToCheck.length > 0) {
@@ -281,8 +299,28 @@ function finishConsultation() {
     state.chatState = "DONE";
     disableInput();
     
-    // First prediction (already calculated from primary symptom)
-    const firstPrediction = predictDisease([state.primarySymptom]);
+    // Calculate candidate diseases for primary symptom
+    let candidates = [];
+    for (let disease in reducedData) {
+        if (reducedData[disease].includes(state.primarySymptom)) {
+            candidates.push(disease);
+        }
+    }
+    if (candidates.length === 0) {
+        candidates.push(predictDisease([state.primarySymptom]));
+    }
+    
+    // Find the candidate disease that has the most matching symptoms with state.symptomsExp
+    let firstPrediction = candidates[0];
+    let maxMatchCount = -1;
+    candidates.forEach(disease => {
+        const syms = reducedData[disease] || [];
+        let matchCount = syms.filter(s => state.symptomsExp.includes(s)).length;
+        if (matchCount > maxMatchCount) {
+            maxMatchCount = matchCount;
+            firstPrediction = disease;
+        }
+    });
     
     // Second prediction (using all confirmed symptoms)
     const secondPrediction = predictDisease(state.symptomsExp);
