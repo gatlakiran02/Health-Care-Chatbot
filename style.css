@@ -654,3 +654,69 @@ header {
         opacity: 1;
     }
 }
+
+/* Hospital Locator Styles */
+.locator-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.hospital-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 12px 14px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: var(--transition-smooth);
+}
+
+.hospital-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-active);
+}
+
+.hospital-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.hospital-distance {
+    font-size: 0.75rem;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.hospital-address {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.hospital-link {
+    font-size: 0.8rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    transition: var(--transition-smooth);
+}
+
+.hospital-link:hover {
+    color: #a5b4fc;
+}
+
+/* Override Leaflet's zoom buttons z-index so they don't overlay headers */
+.leaflet-control-container .leaflet-top,
+.leaflet-control-container .leaflet-bottom {
+    z-index: 100 !important;
+}
+.leaflet-pane {
+    z-index: 9 !important;
+}

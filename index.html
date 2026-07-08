@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedAI - Intelligent Healthcare Assistant</title>
     <meta name="description" content="An advanced AI-powered symptom checker and health assessment tool that helps you understand potential medical conditions based on decision tree models.">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -102,6 +103,21 @@
                         <!-- Precaution items go here -->
                     </div>
 
+                    <div class="report-divider"></div>
+
+                    <div class="report-section-title">Nearby Medical Facilities</div>
+                    <div class="locator-container">
+                        <button id="find-hospitals-btn" class="btn btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            Find Nearby Hospitals
+                        </button>
+                        <p id="locator-status" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 8px; text-align: center; display: none;"></p>
+                        <div id="hospital-map" style="height: 200px; border-radius: var(--border-radius-md); margin-top: 12px; display: none; border: 1px solid var(--border-color); z-index: 10;"></div>
+                        <div id="hospital-list" style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;"></div>
+                    </div>
+
+                    <div class="report-divider"></div>
+
                     <div class="disclaimer-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
@@ -115,6 +131,7 @@
         </aside>
     </div>
     
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>

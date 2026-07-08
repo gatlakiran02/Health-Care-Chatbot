@@ -401,6 +401,9 @@ function renderReportCard(disease, desc, risk, riskText, precautions, score) {
     
     reportEmpty.style.display = "none";
     reportContent.style.display = "block";
+    
+    // Initialize Hospital Locator Button Event Listener
+    initHospitalLocator();
 }
 
 // Autocomplete logic
@@ -491,3 +494,151 @@ window.onload = () => {
         enableTextInput("Enter your name here...");
     });
 };
+
+// Map Instance global variable
+let mapInstance = null;
+
+// Initialize Hospital Locator Click Event
+function initHospitalLocator() {
+    const findBtn = document.getElementById("find-hospitals-btn");
+    const statusText = document.getElementById("locator-status");
+    const mapDiv = document.getElementById("hospital-map");
+    const listDiv = document.getElementById("hospital-list");
+
+    if (!findBtn) return;
+
+    // Reset locator view if button is re-rendered
+    statusText.style.display = "none";
+    listDiv.innerHTML = "";
+    mapDiv.style.display = "none";
+    findBtn.disabled = false;
+
+    findBtn.onclick = () => {
+        findBtn.disabled = true;
+        statusText.style.display = "block";
+        statusText.innerText = "Requesting your location...";
+        listDiv.innerHTML = "";
+        mapDiv.style.display = "none";
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    statusText.innerText = "Fetching nearby medical facilities...";
+                    fetchNearbyHospitals(lat, lon, statusText, mapDiv, listDiv);
+                },
+                (error) => {
+                    findBtn.disabled = false;
+                    statusText.innerHTML = `
+                        Location access denied or unavailable. 
+                        <br><a href="https://www.google.com/maps/search/hospitals+near+me/" target="_blank" class="hospital-link" style="justify-content: center; margin-top: 8px;">
+                            Search on Google Maps <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="margin-left: 4px;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                        </a>
+                    `;
+                }
+            );
+        } else {
+            findBtn.disabled = false;
+            statusText.innerText = "Geolocation is not supported by your browser.";
+        }
+    };
+}
+
+// Fetch from Overpass API
+function fetchNearbyHospitals(lat, lon, statusText, mapDiv, listDiv) {
+    const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];node(around:5000,${lat},${lon})[amenity~"hospital|clinic|doctors"];out;`;
+
+    fetch(overpassUrl)
+        .then(response => response.json())
+        .then(data => {
+            statusText.style.display = "none";
+            const elements = data.elements || [];
+
+            if (elements.length === 0) {
+                listDiv.innerHTML = `<p style="font-size: 0.85rem; color: var(--text-secondary); text-align: center;">No medical facilities found within 5km.</p>`;
+                document.getElementById("find-hospitals-btn").disabled = false;
+                return;
+            }
+
+            // Show Map
+            mapDiv.style.display = "block";
+            
+            // Initialize Leaflet Map
+            if (mapInstance) {
+                mapInstance.remove();
+            }
+            mapInstance = L.map('hospital-map').setView([lat, lon], 14);
+
+            // Add Tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(mapInstance);
+
+            // Add User Marker
+            const userIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: "<div style='background-color:#6366f1; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 8px rgba(99,102,241,0.6);'></div>",
+                iconSize: [14, 14],
+                iconAnchor: [7, 7]
+            });
+            L.marker([lat, lon], { icon: userIcon }).addTo(mapInstance).bindPopup("You are here").openPopup();
+
+            // Calculate Distance and Sort
+            const sortedFacilities = elements.map(el => {
+                const name = el.tags.name || "Medical Facility";
+                const type = formatSymptomName(el.tags.amenity || "facility");
+                const distance = getHaversineDistance(lat, lon, el.lat, el.lon);
+                const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat},${lon}&destination=${el.lat},${el.lon}`;
+                return { name, type, distance, lat: el.lat, lon: el.lon, url: googleMapsUrl };
+            }).sort((a, b) => a.distance - b.distance).slice(0, 5); // Limit to top 5 closest
+
+            // Add Markers and Render cards
+            sortedFacilities.forEach(facility => {
+                // Map Marker
+                L.marker([facility.lat, facility.lon]).addTo(mapInstance)
+                    .bindPopup(`<b>${facility.name}</b><br>${facility.type}`);
+
+                // List Card
+                const card = document.createElement("div");
+                card.classList.add("hospital-card");
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <span class="hospital-name">${facility.name}</span>
+                        <span class="hospital-distance">${facility.distance.toFixed(1)} km</span>
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">${facility.type}</div>
+                    <a href="${facility.url}" target="_blank" class="hospital-link">
+                        Get Directions
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="margin-left: 2px;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                    </a>
+                `;
+                listDiv.appendChild(card);
+            });
+
+            // Trigger map resize since it was hidden
+            setTimeout(() => {
+                mapInstance.invalidateSize();
+            }, 100);
+
+            // Re-enable button
+            document.getElementById("find-hospitals-btn").disabled = false;
+        })
+        .catch(err => {
+            statusText.innerText = "Error searching facilities. Please try again.";
+            document.getElementById("find-hospitals-btn").disabled = false;
+        });
+}
+
+// Distance Calculation Helper (Haversine formula)
+function getHaversineDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
